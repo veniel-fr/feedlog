@@ -50,17 +50,16 @@ export function useWidgetSettings() {
   // The API keeps built-ins and custom rules apart because they are stored
   // differently; the UI shows one list, so flatten here. Built-ins carry no
   // editable text — only a toggle.
-  const { locale } = useI18n()
+  const isZh = useIsZhLocale()
   const allRules = computed(() => {
     const s = settings.value
     if (!s) return []
     // Built-ins ship in both languages; a custom rule is shown as the admin
     // typed it, in either locale — their own prompt text is never translated.
-    const zh = locale.value.startsWith('zh')
     return [
       ...s.rules.builtins.map(b => ({
         id: b.id,
-        scenario: zh ? b.scenarioZh : b.scenario,
+        scenario: isZh.value ? b.scenarioZh : b.scenario,
         enabled: b.enabled,
         builtin: true,
       })),

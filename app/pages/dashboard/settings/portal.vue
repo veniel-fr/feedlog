@@ -163,7 +163,6 @@ async function save() {
               <ClientOnly>
                 <ThemedMdEditor
                   v-model="form.welcomeDescription"
-                  language="en-US"
                   :placeholder="$t('settings.portal.descriptionPlaceholder')"
                   :preview="false"
                   :max-length="10000"

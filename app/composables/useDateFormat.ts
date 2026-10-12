@@ -16,9 +16,9 @@ export function useTimeAgo() {
 }
 
 export function useFormatDate() {
-  const { locale } = useI18n()
+  const language = useLocaleLanguage()
   return (dateStr: string | Date): string =>
-    new Date(dateStr).toLocaleDateString(locale.value === 'zh' ? 'zh-CN' : 'en-US', {
+    new Date(dateStr).toLocaleDateString(language.value, {
       month: 'short',
       day: 'numeric',
       year: 'numeric',

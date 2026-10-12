@@ -34,8 +34,10 @@ function copy() {
   setTimeout(() => { copied.value = false }, 1500)
 }
 
+const language = useLocaleLanguage()
+
 function formatDate(iso: string): string {
-  return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+  return new Date(iso).toLocaleDateString(language.value, { month: 'short', day: 'numeric', year: 'numeric' })
 }
 </script>
 

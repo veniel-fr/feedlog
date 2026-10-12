@@ -13,7 +13,9 @@ import type {
 } from '#layers/feedlog/shared/inbox/types'
 
 definePageMeta({ layout: 'dashboard', middleware: 'admin' })
-const { t, locale } = useI18n()
+const { t } = useI18n()
+const language = useLocaleLanguage()
+const isZh = useIsZhLocale()
 const { data: session } = useAuthSession()
 const { confirm } = useConfirmDialog()
 const { authorName } = useAuthorDisplay()
@@ -92,7 +94,7 @@ let detailVersion = 0
 let polling: ReturnType<typeof setInterval> | undefined
 let media: MediaQueryList | undefined
 let pollingBusy = false
-const date = (value: string | null) => (value ? new Date(value).toLocaleString(locale.value) : '')
+const date = (value: string | null) => (value ? new Date(value).toLocaleString(language.value) : '')
 const canReply = computed(() => !!detail.value && ['open', 'pending'].includes(detail.value.conversation.status))
 const isAiHandling = computed(() => detail.value?.conversation.status === 'ai_handling')
 const canClose = computed(() => !!detail.value && detail.value.conversation.status !== 'closed')
@@ -523,7 +525,7 @@ loading.value = false
                 <div v-if="part.type === 'system_event' && showSystemNotice(part)" class="flex flex-wrap items-center justify-center gap-x-1.5 gap-y-1 py-1 text-center text-[11px] leading-relaxed text-muted-foreground">
                   <details v-if="part.kind === 'handoff' && part.rule" class="min-w-0 max-w-full">
                     <summary class="cursor-pointer list-none underline decoration-dotted underline-offset-4">{{ handoffNotice(part) }}</summary>
-                    <p class="mt-2 max-w-prose whitespace-normal break-words text-left">{{ locale === 'zh' && part.rule.scenarioZh ? part.rule.scenarioZh : part.rule.scenario }}</p>
+                    <p class="mt-2 max-w-prose whitespace-normal break-words text-left">{{ isZh && part.rule.scenarioZh ? part.rule.scenarioZh : part.rule.scenario }}</p>
                   </details>
                   <span v-else-if="part.kind === 'handoff'">{{ handoffNotice(part) }}</span>
                   <span v-else>{{ t(part.kind === 'snoozed' ? 'inbox.noticeSnoozed' : 'inbox.noticeClosed', { name: item.author?.name || t('widget.messageStaff'), time: date(part.dueAt ?? null) }) }}</span>

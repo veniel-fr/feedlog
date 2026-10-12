@@ -72,9 +72,11 @@ const pageNumbers = computed(() => {
   return pages
 })
 
+const language = useLocaleLanguage()
+
 function formatListDate(iso: string | null) {
   if (!iso) return '-'
-  return new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric' }).format(new Date(iso))
+  return new Intl.DateTimeFormat(language.value, { month: 'long', day: 'numeric', year: 'numeric' }).format(new Date(iso))
 }
 
 function displayDate(item: ChangelogAdminListItem) {

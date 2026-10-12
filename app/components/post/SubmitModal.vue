@@ -11,7 +11,7 @@ const props = defineProps<{
 const open = defineModel<boolean>('open', { default: false })
 const emit = defineEmits<{ created: [slug: string] }>()
 
-const { t, locale } = useI18n()
+const { t } = useI18n()
 
 const boardStore = useBoardStore()
 const { boards } = storeToRefs(boardStore)
@@ -220,7 +220,6 @@ watch(open, (v) => {
             <div class="editor-preview-styled flex-1 min-h-[120px] transition-all duration-300">
               <ThemedMdEditor
                 v-model="content"
-                :language="locale === 'zh' ? 'zh-CN' : 'en-US'"
                 :placeholder="$t('post.submit.bodyPlaceholder')"
                 :preview="false"
                 :max-length="10000"

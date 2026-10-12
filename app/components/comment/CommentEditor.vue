@@ -51,7 +51,6 @@ defineExpose({ clear })
   <div class="comment-editor">
     <ThemedMdEditor
       v-model="content"
-      language="en-US"
       :placeholder="placeholder || (isReply ? $t('post.comment.replyPlaceholder') : $t('post.comment.addPlaceholder'))"
       :preview="false"
       :max-length="5000"

@@ -7,7 +7,8 @@ import { updateWidgetSettingsSchema } from '#layers/feedlog/shared/schemas/widge
 
 definePageMeta({ layout: 'dashboard', middleware: ['admin'] })
 
-const { t, locale } = useI18n()
+const { t } = useI18n()
+const isZh = useIsZhLocale()
 const ctx = useOrgContext()
 const canEdit = computed(() => ctx.value.role === 'owner' || ctx.value.role === 'manager')
 const { settings, loading, saving, error, refresh, save, allRules, builtinsPatch, customPatch } = useWidgetSettings()
@@ -120,7 +121,7 @@ function toggleRule(id: string) {
 function removeRule(id: string) { rulesDraft.value = rulesDraft.value.filter(rule => rule.id !== id) }
 function ruleText(rule: typeof rulesDraft.value[number]) {
   const builtin = rule.builtin && settings.value?.rules.builtins.find(item => item.id === rule.id)
-  return builtin ? (locale.value.startsWith('zh') ? builtin.scenarioZh : builtin.scenario) : rule.scenario
+  return builtin ? (isZh.value ? builtin.scenarioZh : builtin.scenario) : rule.scenario
 }
 
 const dirty = computed(() => launcherDirty.value || assistantDirty.value)

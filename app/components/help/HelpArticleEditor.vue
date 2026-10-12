@@ -81,9 +81,11 @@ watch(collections, (list) => {
   if (isNew.value && !draftCollectionId.value) draftCollectionId.value = list[0]?.id ?? ''
 }, { immediate: true })
 
+const language = useLocaleLanguage()
+
 function formatStamp(iso: string | null | undefined) {
   if (!iso) return '—'
-  return new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' }).format(new Date(iso))
+  return new Intl.DateTimeFormat(language.value, { month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' }).format(new Date(iso))
 }
 
 async function patch(body: Record<string, unknown>) {
@@ -299,7 +301,6 @@ function goBack() {
           <ClientOnly>
             <ThemedMdEditor
               v-model="form.content"
-              language="en-US"
               :placeholder="$t('help.admin.editor.bodyPlaceholder')"
               :preview="false"
               :max-length="50000"

@@ -461,7 +461,6 @@ function handleAiApply(result: ChangelogAiResult) {
             <div class="editor-preview-styled min-h-0 flex-1 overflow-hidden [&_.md-editor]:rounded-lg [&_.md-editor]:border-transparent [&_.md-editor]:shadow-[0_0_0_1px_rgba(0,0,0,0.08)] dark:[&_.md-editor]:shadow-[0_0_0_1px_rgba(255,255,255,0.1)]">
               <ThemedMdEditor
                 v-model="localContent"
-                language="en-US"
                 :placeholder="$t('changelog.editor.contentPlaceholder')"
                 :preview="false"
                 :max-length="20000"

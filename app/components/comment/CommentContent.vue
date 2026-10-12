@@ -11,7 +11,7 @@ const resolvedContent = computed(() => resolveAttachmentUrls(props.content))
 
 <template>
   <div class="comment-content">
-    <ThemedMdPreview :model-value="resolvedContent" language="en-US" />
+    <ThemedMdPreview :model-value="resolvedContent" />
   </div>
 </template>
 

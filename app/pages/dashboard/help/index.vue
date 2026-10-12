@@ -229,8 +229,10 @@ const CHIP = 'inline-flex shrink-0 items-center rounded border px-2 py-0.5 text-
 const rangeFrom = computed(() => (total.value === 0 ? 0 : (page.value - 1) * PAGE_SIZE + 1))
 const rangeTo = computed(() => Math.min(page.value * PAGE_SIZE, total.value))
 
+const language = useLocaleLanguage()
+
 function formatDate(iso: string) {
-  return new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).format(new Date(iso))
+  return new Intl.DateTimeFormat(language.value, { month: 'short', day: 'numeric', year: 'numeric' }).format(new Date(iso))
 }
 </script>
 

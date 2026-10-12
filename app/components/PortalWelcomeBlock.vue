@@ -38,7 +38,6 @@ const hasContent = computed(() => props.title.trim().length > 0 || props.descrip
       <ThemedMdPreview
         v-if="description"
         :model-value="resolvedDescription"
-        language="en-US"
         class="mt-2"
       />
     </div>
